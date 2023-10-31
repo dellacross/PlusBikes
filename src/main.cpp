@@ -11,30 +11,9 @@ bool BikeOrVisitor(char s) // true if is bike; false if is visitor;
         return false;
 }
 
-int getElementID(char s) // return the id
-{
-    if (s == '0' || s == 'a')
-        return 1;
-    else if (s == '1' || s == 'b')
-        return 2;
-    else if (s == '2' || s == 'c')
-        return 3;
-    else if (s == '3' || s == 'd')
-        return 4;
-    else if (s == '4' || s == 'e')
-        return 5;
-    else if (s == '5' || s == 'f')
-        return 6;
-    else if (s == '6' || s == 'g')
-        return 7;
-    else if (s == '7' || s == 'h')
-        return 8;
-    else if (s == '8' || s == 'i')
-        return 9;
-    else if (s == '9' || s == 'j')
-        return 10;
-    else
-        return -1;
+int getElementID(char character) { // return the element's id
+    if (character < 58) return character - 47;
+    return character - 96;
 }
 
 bool ifExists(int x, vector<int> q) // check if exists the element on the vector
