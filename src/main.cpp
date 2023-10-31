@@ -11,7 +11,7 @@ bool BikeOrVisitor(char s) // true if is bike; false if is visitor;
         return false;
 }
 
-int checkID(char s) // return the id
+int getElementID(char s) // return the id
 {
     if (s == '0' || s == 'a')
         return 1;
@@ -69,6 +69,32 @@ vector<int> getDimensions(fstream &file) {
     return {numberOfElements, xAxis, yAxis};
 }
 
+void setMapMatrixCells(fstream &file, Map &map, int xAxis, int yAxis, int numberOfElements) {
+    string line = "";
+    for (int lines = 0; lines < xAxis; lines++)
+    {
+        getline(file, line);
+
+        for (int k = 0; k < yAxis; k++)
+        {
+            if (line[k] == '-')
+                map.updateMapMatrixCell(lines, k, true, -1, -1);
+            else if (line[k] == '*')
+                map.updateMapMatrixCell(lines, k, false, -1, -1);
+            else if (BikeOrVisitor(line[k]))
+            {
+                map.updateMapMatrixCell(lines, k, false, getElementID(line[k]), -1);
+                map.addCoordOfBike(getElementID(line[k]) - 1, lines, k);
+            }
+            else if (!BikeOrVisitor(line[k]))
+            {
+                map.updateMapMatrixCell(lines, k, false, -1, getElementID(line[k]));
+                map.addCoordOfVisitor(getElementID(line[k]) - 1, lines, k);
+            }
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     fstream file(argv[1]);
@@ -82,28 +108,7 @@ int main(int argc, char *argv[])
 
         Map map(x, y, n);
 
-        for (int j = 0; j < x; j++)
-        {
-            getline(file, line);
-
-            for (int k = 0; k < y; k++)
-            {
-                if (line[k] == '-')
-                    map.updateMapMatrixCell(j, k, true, -1, -1);
-                else if (line[k] == '*')
-                    map.updateMapMatrixCell(j, k, false, -1, -1);
-                else if (BikeOrVisitor(line[k]))
-                {
-                    map.updateMapMatrixCell(j, k, false, checkID(line[k]), -1);
-                    map.addCoordOfBike(checkID(line[k]) - 1, j, k);
-                }
-                else if (!BikeOrVisitor(line[k]))
-                {
-                    map.updateMapMatrixCell(j, k, false, -1, checkID(line[k]));
-                    map.addCoordOfVisitor(checkID(line[k]) - 1, j, k);
-                }
-            }
-        }
+        setMapMatrixCells(file, map, x, y, n);
 
         pair<int, int> vm[n][n];
         vector<int> auxV;
