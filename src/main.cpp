@@ -53,6 +53,22 @@ bool ifExists(int x, vector<int> q) // check if exists the element on the vector
     }
 }
 
+vector<int> getDimensions(fstream &file) {
+    string line = "";
+    int xAxis, yAxis, numberOfElements;
+    for (int i = 0; i < 2; i++) {
+        getline(file, line);
+        stringstream lineStream(line);
+
+        if (i == 0)
+            lineStream >> numberOfElements;
+        else
+            lineStream >> xAxis >> yAxis;
+    }
+
+    return {numberOfElements, xAxis, yAxis};
+}
+
 int main(int argc, char *argv[])
 {
     fstream file(argv[1]);
@@ -60,18 +76,9 @@ int main(int argc, char *argv[])
     if (file)
     {
         string line = "";
-        int x, y, n;
+        vector<int> values = getDimensions(file);
 
-        for (int i = 0; i < 2; i++)
-        {
-            getline(file, line);
-            stringstream lineStream(line);
-
-            if (i == 0)
-                lineStream >> n;
-            else
-                lineStream >> x >> y;
-        }
+        int n = values[0], x = values[1], y = values[2];
 
         Map map(x, y, n);
 
