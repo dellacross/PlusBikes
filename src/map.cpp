@@ -26,16 +26,16 @@ void Map::initBikesPreferenceMatrix()
         bikesPreferenceMatrix[i] = new pair<int, int>[numElements];
 }
 
-void Map::updateMapMatrixCell(int i, int j, bool obst, int bID, int vID)
+void Map::updateMapMatrixCell(int mapMatrixLinePosition, int mapMatrixColumnPosition, bool isObstacle, int bikeID, int visitorID)
 {
-    if (obst == true)
-        mapMatrix[i][j].obstacle = obst;
+    if (isObstacle == true)
+        mapMatrix[mapMatrixLinePosition][mapMatrixColumnPosition].obstacle = isObstacle;
     else
     {
-        if (bID == -1)
-            mapMatrix[i][j].visitorID = vID;
+        if (bikeID == -1)
+            mapMatrix[mapMatrixLinePosition][mapMatrixColumnPosition].visitorID = visitorID;
         else
-            mapMatrix[i][j].bikeID = bID;
+            mapMatrix[mapMatrixLinePosition][mapMatrixColumnPosition].bikeID = bikeID;
     }
 }
 

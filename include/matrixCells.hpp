@@ -7,6 +7,18 @@ class Cell
 public:
     Cell(int bID = -1, int vID = -1, bool obst = false, bool visited = false) : bikeID(bID), visitorID(vID), obstacle(obst){};
 
+    bool ifIsObstacle() {
+        return this->obstacle;
+    }
+
+    int getBikeID() {
+        return this->bikeID;
+    }
+
+    int getVisitorID() {
+        return this->visitorID;
+    }
+
 private:
     int bikeID; 
     int visitorID;

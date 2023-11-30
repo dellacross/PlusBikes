@@ -139,6 +139,35 @@ public:
      **/
     void Sort(pair<int, int> **v, bool (*comp)(const pair<int, int> &x1, const pair<int, int> &x2)) { order(0, numElements - 1, v, comp); };
 
+    /**
+     * @brief get value of dimX 
+    */
+    int getDimX() {
+        return this->dimX;
+    };
+
+    /**
+     * @brief get value of dimY
+    */
+    int getDimY() {
+        return this->dimY;
+    };
+
+    /**
+     * @brief get number of elements on the map 
+    */
+    int getNumberOfElements() {
+        return this->numElements;
+    };
+
+
+    /**
+     * @brief return the map matrix
+    */
+    Cell** getMapMatrix() {
+        return this->mapMatrix;
+    }
+
 private:
     int dimX;        // axis X of the map
     int dimY;        // axis Y of the map
