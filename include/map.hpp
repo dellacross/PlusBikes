@@ -160,12 +160,27 @@ public:
         return this->numElements;
     };
 
-
     /**
      * @brief return the map matrix
     */
     Cell** getMapMatrix() {
         return this->mapMatrix;
+    }
+
+    pair<int, int>** getVisitorsPreferenceMatrix() {
+        return this->visitorsPreferenceMatrix;
+    }
+
+    pair<int, int>** getBikesPreferenceMatrix() {
+        return this->bikesPreferenceMatrix;
+    }
+
+    pair<int, int> *getCoordsOfBikes() {
+        return this->coordsOfBikes;
+    }
+
+    pair<int, int> *getCoordsOfVisitors() {
+        return this->coordsOfVisitors;
     }
 
 private:

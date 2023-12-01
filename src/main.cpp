@@ -3,12 +3,8 @@
 #include <string>
 #include "map.hpp"
 
-bool BikeOrVisitor(char s) // true if is bike; false if is visitor;
-{
-    if (s == '0' || s == '1' || s == '2' || s == '3' || s == '4' || s == '5' || s == '6' || s == '7' || s == '8' || s == '9')
-        return true;
-    else
-        return false;
+bool BikeOrVisitor(char s) { // true if is bike; false if is visitor;
+    return (s >= '0' && s <= '9');
 }
 
 int getElementID(char character) { // return the element's id
@@ -16,8 +12,7 @@ int getElementID(char character) { // return the element's id
     return character - 96;
 }
 
-bool ifExists(int x, vector<int> q) // check if exists the element on the vector
-{
+bool ifExists(int x, vector<int> q) { // check if exists the element on the vector
     int size = q.size();
     if (q.empty())
         return false;
