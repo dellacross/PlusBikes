@@ -6,7 +6,7 @@ TEST_GROUP(MapTests) {
     Map* map;
 
     void setup() {
-        map = new Map(10, 10, 5);
+        map = new Map(10, 10, 12);
         map->initMapMatrix();
     }
 
@@ -23,7 +23,7 @@ TEST(MapTests, InitMapMatrix) {
 
     CHECK_EQUAL(_dimX, 10);
     CHECK_EQUAL(_dimY, 10);
-    CHECK_EQUAL(_numElements, 5);
+    CHECK_EQUAL(_numElements, 12);
 }
 
 // *2* 
@@ -49,18 +49,30 @@ TEST(MapTests, UpdateMapMatrixCell) {
 
 // *4*
 TEST(MapTests, checkCell) {
-    bool invalid_negative_1 = map->checkCell(-1, 3);
-    bool invalid_negative_2 = map->checkCell(1, -3);
     bool invalid_out_of_range_1 = map->checkCell(11, 3);
     bool invalid_out_of_range_2 = map->checkCell(1, 13);
+    bool invalid_out_of_range_3 = map->checkCell(-1, 3);
+    bool invalid_out_of_range_4 = map->checkCell(1, -3);
 
-    CHECK_FALSE(invalid_negative_1);
-    CHECK_FALSE(invalid_negative_2);
     CHECK_FALSE(invalid_out_of_range_1);
     CHECK_FALSE(invalid_out_of_range_2);
+    CHECK_FALSE(invalid_out_of_range_3);
+    CHECK_FALSE(invalid_out_of_range_4);
 }
 
 // *5*
+TEST(MapTests, checkCell) {
+    bool invalid_negative_1 = map->checkCell(-1, 3);
+    bool invalid_negative_2 = map->checkCell(1, -3);
+
+    CHECK_FALSE(invalid_negative_1);
+    CHECK_FALSE(invalid_negative_2);
+}
+
+// *6*
+
+
+// *7*
 TEST(MapTests, initVisitorsPreferenceMatrix) {
     map->initVisitorsPreferenceMatrix();
     pair<int, int>** _visitorMatrix = map->getVisitorsPreferenceMatrix();
@@ -69,7 +81,7 @@ TEST(MapTests, initVisitorsPreferenceMatrix) {
     CHECK_FALSE(_nullptr);
 }
 
-// *6*
+// *8*
 TEST(MapTests, initBikesPreferenceMatrix) {
     map->initBikesPreferenceMatrix();
     pair<int, int>** _bikesMatrix = map->getBikesPreferenceMatrix();
@@ -78,7 +90,7 @@ TEST(MapTests, initBikesPreferenceMatrix) {
     CHECK_FALSE(_nullptr);
 }
 
-// *7*
+// *9*
 TEST(MapTests, initCoordOfBikesVector) {
     map->initCoordOfBikesVector();
     pair<int, int>* _coordsOfBikes = map->getCoordsOfBikes();
@@ -87,7 +99,7 @@ TEST(MapTests, initCoordOfBikesVector) {
     CHECK_FALSE(_nullptr);
 }
 
-// *8*
+// *10*
 TEST(MapTests, initCoordOfVisitorsVector) {
     map->initCoordOfVisitorsVector();
     pair<int, int>* _coordsOfVisitors = map->getCoordsOfVisitors();
@@ -96,14 +108,7 @@ TEST(MapTests, initCoordOfVisitorsVector) {
     CHECK_FALSE(_nullptr);
 }
 
-// *9*
-
-
-// *10*
-
-
 // *11*
-
 
 // *12*
 
