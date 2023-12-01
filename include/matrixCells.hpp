@@ -19,6 +19,10 @@ public:
         return this->visitorID;
     }
 
+    bool ifVisited() {
+        return this->visited;
+    }
+
 private:
     int bikeID; 
     int visitorID;
