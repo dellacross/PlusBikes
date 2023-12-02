@@ -1,6 +1,9 @@
 name: TP2-ES2-TESTS
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -27,6 +30,8 @@ jobs:
     - name: Compile and Run Tests
       shell: bash
       run: |
+        sudo apt-get update && sudo apt-get install -y cpputest
         mkdir obj
         mkdir bin
         make
+        ./bin/tp01 teste2.txt
