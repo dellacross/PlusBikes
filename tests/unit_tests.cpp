@@ -207,4 +207,5 @@ TEST(MapTests, addCoordOfBike) {
     CHECK_EQUAL(_coordsOfBikes[1].second, 3);
     CHECK_EQUAL(_coordsOfBikes[2].first, 3);
     CHECK_EQUAL(_coordsOfBikes[2].second, 1);
+    CHECK_EQUAL(0,1);
 }
