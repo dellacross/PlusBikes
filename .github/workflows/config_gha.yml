@@ -34,4 +34,5 @@ jobs:
         mkdir obj
         mkdir bin
         make
-        ./bin/tp01 teste2.txt
+        g++ -o testRunner testRunner.cpp tests/unit_tests.cpp src/map.cpp -lCppUTest -lCppUTestExt
+        ./testRunner
