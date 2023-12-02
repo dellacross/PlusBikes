@@ -30,4 +30,4 @@ $(BIN)/tp01: $(OBJS)
 	$(CC) -o $(BIN)/tp01 $(CFLAGS) $(OBJS) $(LIBS)
 
 clean:
-	rm $(OBJS) $(BIN)/*
+	rm $(OBJS) $(BIN)/* $(TESTS)/*_output.out

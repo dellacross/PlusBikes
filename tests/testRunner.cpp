@@ -44,6 +44,32 @@ vector<int> getDimensions(fstream &file) {
     return {numberOfElements, xAxis, yAxis};
 }
 
+void setMapMatrixCells(fstream &file, Map &map, int xAxis, int yAxis, int numberOfElements) {
+    string line = "";
+    for (int lines = 0; lines < xAxis; lines++)
+    {
+        getline(file, line);
+
+        for (int k = 0; k < yAxis; k++)
+        {
+            if (line[k] == '-')
+                map.updateMapMatrixCell(lines, k, true, -1, -1);
+            else if (line[k] == '*')
+                map.updateMapMatrixCell(lines, k, false, -1, -1);
+            else if (BikeOrVisitor(line[k]))
+            {
+                map.updateMapMatrixCell(lines, k, false, getElementID(line[k]), -1);
+                map.addCoordOfBike(getElementID(line[k]) - 1, lines, k);
+            }
+            else if (!BikeOrVisitor(line[k]))
+            {
+                map.updateMapMatrixCell(lines, k, false, -1, getElementID(line[k]));
+                map.addCoordOfVisitor(getElementID(line[k]) - 1, lines, k);
+            }
+        }
+    }
+}
+
 // *1*
 void Tests::test_getDimensions(fstream &file){
     vector<int> values = getDimensions(file);
@@ -224,14 +250,119 @@ void Tests::test_addCoordOfBike(Map* map) {
     assert(coordsOfBikes[2].second == 1);
 }
 
+void exec_system(string filePath) {
+    fstream file(filePath);
+    if (file)
+    {
+        string line = "";
+        vector<int> values = getDimensions(file);
+
+        int n = values[0], x = values[1], y = values[2];
+
+        Map map(x, y, n);
+
+        setMapMatrixCells(file, map, x, y, n);
+
+        pair<int, int> vm[n][n];
+        vector<int> auxV;
+        for (int i = 0; i < n; i++)
+        {
+            int aux = 0;
+            pair<int, int> av;
+            getline(file, line);
+            stringstream auxLine(line);
+
+            for (int j = 0; j < n; j++)
+            {
+                auxLine >> aux;
+                vm[i][j].first = j;
+                vm[i][j].second = aux;
+            }
+        }
+
+        int g = -1, gpos = -1;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                for (int k = 0; k < n; k++)
+                {
+                    if (vm[i][k].second >= g && !ifExists(k, auxV))
+                    {
+                        g = vm[i][k].second;
+                        gpos = k;
+                    }
+                }
+                auxV.push_back(gpos);
+                map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
+                g = -1;
+                gpos = -1;
+            }
+            auxV.clear();
+        }
+        cout << "Output:" << "\n";
+        map.GaleShapley(filePath);
+        cout << "\n";
+
+        file.close();
+    }
+    else
+        cout << "ERROR: FILE NOT FOUND!"
+             << "\n";
+}
+
+void compareFiles(string fileName) {
+    char fileNumber = fileName[fileName.length() - 4];
+
+    string outputFilePath = "tests/file";
+    outputFilePath = outputFilePath + fileNumber + "_output.out";
+
+    string expectedOutputFilePath = "tests/teste";
+    expectedOutputFilePath = expectedOutputFilePath + fileNumber + ".out";
+    
+    ifstream outputFile(outputFilePath, ios::binary | ios::ate);
+    ifstream expectedOutputFile(expectedOutputFilePath, ios::binary | ios::ate);
+
+    bool equal = true;
+
+    if(outputFile.tellg() != expectedOutputFile.tellg()) {
+        equal = false;
+        cout << outputFile.tellg() << " = " << expectedOutputFile.tellg() << "\n";
+    }
+    outputFile.seekg(0);
+    expectedOutputFile.seekg(0);
+
+    const size_t bufferSize = 4096;
+    vector<char> buffer1(bufferSize);
+    vector<char> buffer2(bufferSize);
+
+    do {
+        outputFile.read(buffer1.data(), bufferSize);
+        expectedOutputFile.read(buffer2.data(), bufferSize);
+
+        if(buffer1 != buffer2) {
+            equal = false;
+            cout << "false" << "\n";
+        }
+    } while (outputFile.good() && expectedOutputFile.good());
+
+    outputFile.close();
+    expectedOutputFile.close();
+    
+    assert(equal == true);
+}
+
 int main(int argc, char** argv) {
-    fstream file(argv[1]);
+    fstream file1(argv[1]);
     Tests tests;
     Map* map = new Map(4, 4, 3);
     map->initMapMatrix();
-    if(file) {
+
+    cout << "Starting unit tests..." << "\n";
+
+    if(file1) {
         // *1*
-        tests.test_getDimensions(file);
+        tests.test_getDimensions(file1);
     }
     // *2*
     tests.test_ifExists();
@@ -275,7 +406,16 @@ int main(int argc, char** argv) {
     // *15* 
     tests.test_addCoordOfBike(map);
 
-    cout << "Success! All tests passed!" << "\n";
+    cout << "Success! All unit tests passed!" << "\n";
+
+    cout << "Starting system tests..." << "\n";
+
+    for(int i = 1; i < 6; i++) {
+        exec_system(argv[i]);
+        compareFiles(argv[i]);
+    }
+
+    cout << "Success! All system tests passed!" << "\n";
 
     return 0;
 }

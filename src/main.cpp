@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
             }
             auxV.clear();
         }
-        map.GaleShapley();
+        map.GaleShapley(argv[1]);
 
         file.close();
     }

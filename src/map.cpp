@@ -1,4 +1,6 @@
 #include "map.hpp"
+#include <sstream>
+#include <fstream>
 
 void Map::initMapMatrix()
 {
@@ -162,17 +164,42 @@ bool Map::preference(int idB, int propose, int current)
     return false;
 }
 
-void stableMatchingOutput(int *v, int n)
-{
-    char aux = 'a';
-    for (int i = 0; i < n; i++)
-    {
-        cout << aux << " " << v[i] << "\n"; // print the output
-        aux++;
+string outputFilePath() {
+    char number = '1';
+    string file_path = "tests/current_output1.txt";
+    while(true) {
+        ifstream file(file_path);
+        if(file.good()) {
+            number++;
+            string file_number = file_path.substr(file_path.length() - 4);
+            file_path = file_path.substr(0, file_path.length() - 5) + number + file_number;
+        }
+        else 
+            break;
     }
+    return file_path;
 }
 
-void Map::GaleShapley()
+void stableMatchingOutput(int *v, int n, string fileName)
+{
+    char fileNumber = fileName[fileName.length() - 4];
+    string filePath = "tests/file";
+    filePath = filePath + fileNumber + "_output.out";
+    ofstream output_file(filePath);
+
+    char aux = 'a';
+    if(true) {
+        for (int i = 0; i < n; i++)
+        {   
+            cout << aux << " " << v[i] << "\n"; // print the output
+            output_file << aux << " " << v[i] << "\n";
+            aux++;
+        }
+    }
+    output_file.close();
+}
+
+void Map::GaleShapley(string fileName)
 {
     updateBikesPreferenceMatrix();
 
@@ -250,7 +277,7 @@ void Map::GaleShapley()
         }
     }
 
-    stableMatchingOutput(visitors, numElements); // print the output
+    stableMatchingOutput(visitors, numElements, fileName); // print the output
 }
 
 void Map::partition(int left, int right, int &i, int &j, pair<int, int> *v, bool (*comp)(const pair<int, int> &x1, const pair<int, int> &x2))

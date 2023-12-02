@@ -33,4 +33,4 @@ jobs:
         mkdir obj
         mkdir bin
         make
-        ./bin/testRunner tests/teste2.txt
+        ./bin/testRunner tests/teste1.in test/teste2.in test/teste3.in test/teste4.in test/teste5.in
