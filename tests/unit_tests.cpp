@@ -13,7 +13,7 @@ TEST_GROUP(MapTests) {
     Map* map;
 
     void setup() {
-        map = new Map(12, 10, 10);
+        map = new Map(3, 4, 4);
         map->initMapMatrix();
     }
 
@@ -29,9 +29,9 @@ TEST(MapTests, getDimensions) {
 
     int _numberOfElements = values[0], _dimX = values[1], _dimY = values[2];
 
-    CHECK_EQUAL(_numberOfElements, 12);
-    CHECK_EQUAL(_dimX, 10);
-    CHECK_EQUAL(_dimY, 10);
+    CHECK_EQUAL(_numberOfElements, 5);
+    CHECK_EQUAL(_dimX, 4);
+    CHECK_EQUAL(_dimY, 5);
 }
 
 // *2*
@@ -44,6 +44,7 @@ TEST(MapTests, ifExists) {
     CHECK_TRUE(ifExists(1, _vector));
     CHECK_TRUE(ifExists(2, _vector));
     CHECK_TRUE(ifExists(3, _vector));
+    CHECK_FALSE(ifExists(4, _vector));
 }
 
 // *3*
@@ -83,8 +84,8 @@ TEST(MapTests, UpdateMapMatrixCell) {
     map->updateMapMatrixCell(0, 2, false, -1, 3);
     Cell** _map = map->getMapMatrix();
     CHECK_TRUE(_map[2][3].ifIsObstacle());
-    CHECK_EQUAL(3, _map[2][3].getVisitorID());
     CHECK_EQUAL(2, _map[1][4].getBikeID());
+    CHECK_EQUAL(3, _map[0][2].getVisitorID());
 }
 
 // *7*
@@ -146,10 +147,64 @@ TEST(MapTests, initCoordOfVisitorsVector) {
 }
 
 // *13*
+TEST(MapTests, allNoVisited) {
+    map->allNoVisited();
+    Cell** _map1 = map->getMapMatrix();
+    Cell** _map2 = _map1;
+    _map2[0][0].setVisited(true);
+    int x_dimension = map->getDimX(), y_dimension = map->getDimY();
+    bool ifExistVisitedCell_map1 = false, ifExistVisitedCell_map2 = false;
 
+    for(int i = 0; i < x_dimension; i++) {
+        for(int j = 0; j < y_dimension; j++) {
+            if(_map1[i][j].ifVisited())
+                ifExistVisitedCell_map1 = true;
+            if(_map2[i][j].ifVisited())
+                ifExistVisitedCell_map2 = true;
+        }
+    }
+
+    CHECK_FALSE(ifExistVisitedCell_map1);
+    CHECK_TRUE(ifExistVisitedCell_map2);
+}
 
 // *14*
+TEST(MapTests, updateVisitorsPreferenceMatrix) {
+    map->initVisitorsPreferenceMatrix();
+    map->updateVisitorsPreferenceMatrix(0,0,0,2);
+    map->updateVisitorsPreferenceMatrix(0,1,0,0);
+    map->updateVisitorsPreferenceMatrix(0,2,0,1);
+    map->updateVisitorsPreferenceMatrix(1,0,1,1);
+    map->updateVisitorsPreferenceMatrix(1,1,1,0);
+    map->updateVisitorsPreferenceMatrix(1,2,1,2);
+    map->updateVisitorsPreferenceMatrix(2,0,3,0);
+    map->updateVisitorsPreferenceMatrix(2,1,3,2);
+    map->updateVisitorsPreferenceMatrix(2,2,3,1);
 
+    pair<int,int>** _visitorsPreferenceMatrix = map->getVisitorsPreferenceMatrix();
+    CHECK_EQUAL(_visitorsPreferenceMatrix[0][0].second, 2);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[0][1].second, 0);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[0][2].second, 1);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[1][0].second, 1);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[1][1].second, 0);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[1][2].second, 2);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[2][0].second, 0);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[2][1].second, 2);
+    CHECK_EQUAL(_visitorsPreferenceMatrix[2][2].second, 1);
+}
 
 // *15*
+TEST(MapTests, addCoordOfBike) {
+    map->addCoordOfBike(0,2,2);
+    map->addCoordOfBike(1,0,3);
+    map->addCoordOfBike(2,3,1);
 
+    pair<int,int>* _coordsOfBikes = map->getCoordsOfBikes();
+
+    CHECK_EQUAL(_coordsOfBikes[0].first, 2);
+    CHECK_EQUAL(_coordsOfBikes[0].second, 2);
+    CHECK_EQUAL(_coordsOfBikes[1].first, 0);
+    CHECK_EQUAL(_coordsOfBikes[1].second, 3);
+    CHECK_EQUAL(_coordsOfBikes[2].first, 3);
+    CHECK_EQUAL(_coordsOfBikes[2].second, 1);
+}

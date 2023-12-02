@@ -23,6 +23,10 @@ public:
         return this->visited;
     }
 
+    void setVisited(bool _visited) {
+        this->visited = _visited;
+    }
+
 private:
     int bikeID; 
     int visitorID;

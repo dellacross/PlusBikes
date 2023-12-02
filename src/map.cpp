@@ -191,8 +191,8 @@ void Map::GaleShapley()
         return x1.second > x2.second;
     };
 
-    Sort(bikesPreferenceMatrix, compare2);   // sort the list of preferences of the visitors
-    Sort(visitorsPreferenceMatrix, compare); // sort the list of preferences of the bikes
+    Sort(bikesPreferenceMatrix, compare2);   // sort the preferences list of the visitors
+    Sort(visitorsPreferenceMatrix, compare); // sort the preferences list of the bikes
 
     int visitors[numElements]; // visitors[i] is the bike whom visitor i is matched
     int bikes[numElements];    // bikes[i] is the bike whom bike i is matched
