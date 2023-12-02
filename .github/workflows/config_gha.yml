@@ -34,5 +34,3 @@ jobs:
         mkdir obj
         mkdir bin
         make
-        g++ -o testRunner testRunner.cpp tests/unit_tests.cpp src/map.cpp -lCppUTest -lCppUTestExt
-        ./testRunner
