@@ -293,15 +293,15 @@ void exec_system(string filePath) {
                     }
                 }
                 auxV.push_back(gpos);
-                map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
+                //map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
                 g = -1;
                 gpos = -1;
             }
             auxV.clear();
         }
-        /*
-        map.GaleShapley(filePath, true);
-        */
+        
+        //map.GaleShapley(filePath, true);
+        
         file.close();
     }
     else
