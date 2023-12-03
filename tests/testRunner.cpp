@@ -70,15 +70,23 @@ void setMapMatrixCells(fstream &file, Map &map, int xAxis, int yAxis, int number
     }
 }
 
+// UNIT TESTS
+
 // *1*
 void Tests::test_getDimensions(fstream &file){
     vector<int> values = getDimensions(file);
 
-    int _numberOfElements = values[0], _dimX = values[1], _dimY = values[2];
-
-    assert(_numberOfElements == 5);
-    assert(_dimX == 4);
-    assert(_dimY == 5);
+    int _numberOfElements, _dimX, _dimY;
+    string line = "";
+    stringstream lineStream(line);
+    getline(file, line);
+    lineStream >> _numberOfElements;
+    getline(file, line);
+    lineStream >> _dimX >> _dimY;
+    
+    assert(_numberOfElements == values[0]);
+    assert(_dimX == values[1]);
+    assert(_dimY == values[2]);
 }
 
 // *2*
