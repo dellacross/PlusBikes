@@ -24,4 +24,3 @@ jobs:
         else
           ./bin/testRunner tests/teste1.in
         fi
-        shell: bash
