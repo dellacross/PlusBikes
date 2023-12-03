@@ -20,6 +20,12 @@ jobs:
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
           dir
+          cd bin
+          dir
+          cd ..
+          cd tests
+          dir
+          cd ..
         else
           ls
         fi
