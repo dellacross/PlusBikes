@@ -34,6 +34,7 @@ jobs:
         mkdir bin
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
+          g++ -o bin/testRunner.exe  -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp obj/map.o -lm
           ./bin/testRunner < tests/teste1.in
           ./bin/testRunner < tests/teste2.in
           ./bin/testRunner < tests/teste3.in
