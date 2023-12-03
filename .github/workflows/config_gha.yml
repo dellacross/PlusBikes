@@ -33,15 +33,8 @@ jobs:
         mkdir obj
         mkdir bin
         make
-        if [[ $RUNNER_OS == "Windows" ]]; then
-          ./bin/testRunner < tests/teste1.in
-          ./bin/testRunner < tests/teste2.in
-          ./bin/testRunner < tests/teste3.in
-          ./bin/testRunner < tests/teste4.in
-          ./bin/testRunner < tests/teste5.in
-        else
-          ./bin/testRunner tests/teste1.in
-          ./bin/testRunner tests/teste2.in
-          ./bin/testRunner tests/teste3.in
-          ./bin/testRunner tests/teste4.in
-          ./bin/testRunner tests/teste5.in
+        ./bin/testRunner tests/teste1.in
+        ./bin/testRunner tests/teste2.in
+        ./bin/testRunner tests/teste3.in
+        ./bin/testRunner tests/teste4.in
+        ./bin/testRunner tests/teste5.in
