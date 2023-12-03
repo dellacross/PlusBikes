@@ -19,6 +19,9 @@ jobs:
         mkdir bin
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
+          cd bin
+          dir
+          cd ..
           cd tests
           cd
           ./bin/testRunner.exe tests/teste1.in
