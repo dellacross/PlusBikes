@@ -22,5 +22,8 @@ $(OBJ)/testRunner.o: $(HDRS) $(TESTS)/testRunner.cpp
 $(BIN)/testRunner: $(OBJ)/map.o
 	g++ -o bin/testRunner $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
 
+$(BIN)/testRunner.exe: $(OBJ)/map.o
+	g++ -o bin/testRunner.exe $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
+
 clean:
 	rm $(OBJS) $(BIN)/* $(TESTS)/*_output.out
