@@ -36,6 +36,6 @@ jobs:
           g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 -lm
           ./bin/testRunner.exe
         else
-          g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner -Wall -Iinclude -Og -g -std=c++11 -lm
+          make
           ./bin/testRunner
         fi
