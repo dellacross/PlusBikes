@@ -34,8 +34,8 @@ jobs:
         mkdir bin
         if [[ $RUNNER_OS == "Windows" ]]; then
           g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 -lm
-          ./testRunner.exe
+          ./bin/testRunner.exe
         else
           g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner -Wall -Iinclude -Og -g -std=c++11 -lm
-          ./testRunner
+          ./bin/testRunner
         fi
