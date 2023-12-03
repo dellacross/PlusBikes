@@ -19,7 +19,8 @@ jobs:
         mkdir bin
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
-          ./bin/testRunner.exe tests/teste1.in
+          dir
+          ./testRunner.exe tests/teste1.in
         else
           ./bin/testRunner tests/teste1.in
         fi
