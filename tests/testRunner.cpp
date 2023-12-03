@@ -406,10 +406,8 @@ int main(int argc, char** argv) {
     
     cout << "Starting system tests..." << "\n";
 
-    cout << "entrando no exec_system" << "\n";
     exec_system(argv[1]);
-    cout << "passou do exec_system" << "\n";
-    //compareFiles(argv[1]);
+    compareFiles(argv[1]);
 
     cout << "Success! All system tests passed!" << "\n";
     cout << "All tests passed for '" << argv[1] << "' file!\n";
