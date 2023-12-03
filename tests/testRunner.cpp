@@ -326,10 +326,9 @@ void compareFiles(string fileName) {
 
     bool equal = true;
 
-    if(outputFile.tellg() != expectedOutputFile.tellg()) {
+    if(outputFile.tellg() != expectedOutputFile.tellg())
         equal = false;
-        cout << outputFile.tellg() << " = " << expectedOutputFile.tellg() << "\n";
-    }
+
     outputFile.seekg(0);
     expectedOutputFile.seekg(0);
 
@@ -341,10 +340,9 @@ void compareFiles(string fileName) {
         outputFile.read(buffer1.data(), bufferSize);
         expectedOutputFile.read(buffer2.data(), bufferSize);
 
-        if(buffer1 != buffer2) {
+        if(buffer1 != buffer2) 
             equal = false;
-            cout << "false" << "\n";
-        }
+            
     } while (outputFile.good() && expectedOutputFile.good());
 
     outputFile.close();
@@ -409,7 +407,7 @@ int main(int argc, char** argv) {
     cout << "Success! All unit tests passed!" << "\n";
 
     cout << "Starting system tests..." << "\n";
-    
+
     exec_system(argv[1]);
     compareFiles(argv[1]);
 

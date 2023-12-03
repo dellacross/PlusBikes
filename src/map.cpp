@@ -5,7 +5,7 @@
 void Map::initMapMatrix()
 {
     mapMatrix = new Cell *[dimX];
-    for (int i = 0; i < dimX; i++)
+    for (int i = 0; i <= dimX-1; i++)
         mapMatrix[i] = new Cell[dimY];
 
     initVisitorsPreferenceMatrix();
@@ -17,14 +17,14 @@ void Map::initMapMatrix()
 void Map::initVisitorsPreferenceMatrix()
 {
     visitorsPreferenceMatrix = new pair<int, int> *[numElements];
-    for (int i = 0; i < numElements; i++)
+    for (int i = 0; i <= numElements-1; i++)
         visitorsPreferenceMatrix[i] = new pair<int, int>[numElements];
 }
 
 void Map::initBikesPreferenceMatrix()
 {
     bikesPreferenceMatrix = new pair<int, int> *[numElements];
-    for (int i = 0; i < numElements; i++)
+    for (int i = 0; i <= numElements-1; i++)
         bikesPreferenceMatrix[i] = new pair<int, int>[numElements];
 }
 
@@ -79,7 +79,7 @@ int Map::BFS(int bi, int bj, int vi, int vj) // BFS method
             break;
         }
 
-        for (int k = 0; k < 4; k++)
+        for (int k = 0; k <= 3; k++)
         {
             int ai = auxI + auxLine[k];
             int aj = auxJ + auxCol[k];
@@ -127,12 +127,12 @@ void Map::addCoordOfVisitor(int id, int i, int j)
 void Map::updateBikesPreferenceMatrix()
 {
     int bi, bj, vi, vj;
-    for (int i = 0; i < numElements; i++)
+    for (int i = 0; i <= numElements-1; i++)
     {
         bi = coordsOfBikes[i].first;
         bj = coordsOfBikes[i].second;
 
-        for (int j = 0; j < numElements; j++)
+        for (int j = 0; j <= numElements-1; j++)
         {
             vi = coordsOfVisitors[j].first;
             vj = coordsOfVisitors[j].second;
@@ -145,15 +145,15 @@ void Map::updateBikesPreferenceMatrix()
 
 void Map::allNoVisited() // turn all cells to unvisited
 {
-    for (int i = 0; i < dimX; i++)
-        for (int j = 0; j < dimY; j++)
+    for (int i = 0; i <= dimX-1; i++)
+        for (int j = 0; j <= dimY-1; j++)
             if (mapMatrix[i][j].visited == true)
                 mapMatrix[i][j].visited = false;
 }
 
 bool Map::preference(int idB, int propose, int current)
 {
-    for (int i = 0; i < numElements; i++)
+    for (int i = 0; i <= numElements-1; i++)
     {
         if (bikesPreferenceMatrix[idB][i].first == propose)
             return true;
@@ -189,7 +189,7 @@ void stableMatchingOutput(int *v, int n, string fileName)
 
     char aux = 'a';
     if(true) {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i <= n-1; i++)
         {   
             cout << aux << " " << v[i] << "\n"; // print the output
             output_file << aux << " " << v[i] << "\n";
@@ -227,11 +227,11 @@ void Map::GaleShapley(string fileName)
     int unmatchedVisitors = numElements;
     int visitorWhoProposes = 0, current_bike = 0;
 
-    for (int i = 0; i < numElements; i++) // init visitors[], bikes[] and proposes[][]
+    for (int i = 0; i <= numElements-1; i++) // init visitors[], bikes[] and proposes[][]
     {
         visitors[i] = -1;
         bikes[i] = -1;
-        for (int j = 0; j < numElements; j++)
+        for (int j = 0; j <= numElements-1; j++)
         {
             proposes[i][j].first = visitorsPreferenceMatrix[i][j].first;
             proposes[i][j].second = 0;
@@ -240,7 +240,7 @@ void Map::GaleShapley(string fileName)
 
     while (unmatchedVisitors > 0)
     {
-        for (int i = 0; i < numElements; i++)
+        for (int i = 0; i <= numElements-1; i++)
         {
             if (visitors[i] == -1) // pick the first unmatched visitor
             {
@@ -249,7 +249,7 @@ void Map::GaleShapley(string fileName)
             }
         }
 
-        for (int j = 0; j < numElements; j++) // pick the first bike on visitor's list to whom has not yet propose
+        for (int j = 0; j <= numElements-1; j++) // pick the first bike on visitor's list to whom has not yet propose
         {
             if (proposes[visitorWhoProposes][j].second == 0)
             {
@@ -309,7 +309,7 @@ void Map::partition(int left, int right, int &i, int &j, pair<int, int> *v, bool
 void Map::order(int left, int right, pair<int, int> **v, bool (*comp)(const pair<int, int> &x1, const pair<int, int> &x2))
 {
     int i, j;
-    for (int k = 0; k < numElements; k++)
+    for (int k = 0; k <= numElements-1; k++)
     {
         partition(left, right, i, j, v[k], comp);
         if (left < j)
@@ -321,11 +321,11 @@ void Map::order(int left, int right, pair<int, int> **v, bool (*comp)(const pair
 
 Map::~Map()
 {
-    for(int i = 0; i < dimY; i++)
+    for(int i = 0; i <= dimY-1; i++)
     {
         delete mapMatrix[i];
     }
-    for(int i = 0; i < numElements; i++)
+    for(int i = 0; i <= numElements-1; i++)
     {
         delete visitorsPreferenceMatrix[i];
         delete bikesPreferenceMatrix[i];
