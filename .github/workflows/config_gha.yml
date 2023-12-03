@@ -20,7 +20,7 @@ jobs:
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
           cd tests
-          dir /s teste1.in
+          cd
           ./bin/testRunner.exe tests/teste1.in
         else
           ./bin/testRunner tests/teste1.in
