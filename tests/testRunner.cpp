@@ -280,6 +280,7 @@ void exec_system(string filePath) {
         }
 
         int g = -1, gpos = -1;
+        //cout << "n:" << n << "\n";
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
@@ -288,11 +289,12 @@ void exec_system(string filePath) {
                 {
                     if (vm[i][k].second >= g && !ifExists(k, auxV))
                     {
+                        //cout << "i:" << i << " k:" << k << "\n";
                         g = vm[i][k].second;
                         gpos = k;
                     }
                 }
-                auxV.push_back(gpos);
+                //auxV.push_back(gpos);
                 //map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
                 g = -1;
                 gpos = -1;
