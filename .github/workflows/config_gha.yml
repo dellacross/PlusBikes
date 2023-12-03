@@ -26,6 +26,7 @@ jobs:
           cd tests
           dir
           cd ..
+          ./bin/testRunner.exe tests/teste1.in
         else
           ls
         fi
