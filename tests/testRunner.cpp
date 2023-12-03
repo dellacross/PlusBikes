@@ -304,7 +304,6 @@ void exec_system(string filePath) {
         
         map.GaleShapley(filePath, true);
         file.close();
-        cout << "fechou arquivo" << "\n";
     }
     else
         cout << "ERROR: FILE NOT FOUND!"
@@ -408,6 +407,7 @@ int main(int argc, char** argv) {
     cout << "Starting system tests..." << "\n";
 
     exec_system(argv[1]);
+    cout << "passou do exec_system" << "\n";
     //compareFiles(argv[1]);
 
     cout << "Success! All system tests passed!" << "\n";
