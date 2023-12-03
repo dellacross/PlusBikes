@@ -409,6 +409,7 @@ int main(int argc, char** argv) {
     compareFiles(argv[1]);
 
     cout << "Success! All system tests passed!" << "\n";
+    cout << "All tests passed for '" << argv[1] << "' file!\n";
 
     return 0;
 }
