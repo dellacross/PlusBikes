@@ -180,7 +180,7 @@ string outputFilePath() {
     return file_path;
 }
 
-void stableMatchingOutput(int *v, int n, string fileName)
+void stableMatchingOutput(int *v, int n, string fileName, bool testRun)
 {
     char fileNumber = fileName[fileName.length() - 4];
     string filePath = "tests/file";
@@ -188,18 +188,16 @@ void stableMatchingOutput(int *v, int n, string fileName)
     ofstream output_file(filePath);
 
     char aux = 'a';
-    if(true) {
-        for (int i = 0; i < n; i++)
-        {   
-            cout << aux << " " << v[i] << "\n"; // print the output
-            output_file << aux << " " << v[i] << "\n";
-            aux++;
-        }
+    for (int i = 0; i < n; i++)
+    {   
+        if(!testRun) cout << aux << " " << v[i] << "\n"; // print the output
+        if(testRun) output_file << aux << " " << v[i] << "\n";
+        aux++;
     }
     output_file.close();
 }
 
-void Map::GaleShapley(string fileName)
+void Map::GaleShapley(string fileName, bool testRun)
 {
     updateBikesPreferenceMatrix();
 
@@ -277,7 +275,7 @@ void Map::GaleShapley(string fileName)
         }
     }
 
-    stableMatchingOutput(visitors, numElements, fileName); // print the output
+    stableMatchingOutput(visitors, numElements, fileName, testRun); // print the output
 }
 
 void Map::partition(int left, int right, int &i, int &j, pair<int, int> *v, bool (*comp)(const pair<int, int> &x1, const pair<int, int> &x2))

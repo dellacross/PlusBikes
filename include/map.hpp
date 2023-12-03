@@ -121,7 +121,7 @@ class Map
          * @brief Gale-Shapley method (stable matching)
          *
          */
-        void GaleShapley(string fileName);
+        void GaleShapley(string fileName, bool testRun);
 
         /**
          * @brief Return the chosen visitor by the bike
