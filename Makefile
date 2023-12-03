@@ -11,6 +11,7 @@ CFLAGS = -Wall -I$(INC) -Og -g -std=c++11
 
 EXE = $(BIN)/tp02 
 EXE_TESTS = $(BIN)/testRunner
+
 all: $(EXE) $(EXE_TESTS) 
 
 $(OBJ)/map.o: $(HDRS) $(SRC)/map.cpp
