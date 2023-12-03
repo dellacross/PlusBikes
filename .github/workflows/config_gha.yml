@@ -17,12 +17,11 @@ jobs:
       run: |
         mkdir obj
         mkdir bin
+        make
         if [[ $RUNNER_OS == "Windows" ]]; then
+          cd bin
           dir
-          g++ -o testRunner.exe -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp src/map.cpp -lm
-          dir
-          ./testRunner.exe tests/teste1.in
+          ./testRunner.exe ../tests/teste1.in
         else
-          make
           ./bin/testRunner tests/teste1.in
         fi
