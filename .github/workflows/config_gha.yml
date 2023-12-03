@@ -10,19 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up environment
-      shell: bash
-      run: |
-        if [[ $RUNNER_OS == "Linux" ]]; then
-          sudo apt-get update
-          sudo apt-get install g++ -y
-        elif [[ $RUNNER_OS == "macOS" ]]; then
-          brew install gcc
-        elif [[ $RUNNER_OS == "Windows" ]]; then
-          choco install mingw
-        fi
+    - uses: actions/checkout@v4
 
     - name: Compile and Run Tests
       shell: bash
