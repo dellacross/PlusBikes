@@ -319,14 +319,13 @@ void Map::order(int left, int right, pair<int, int> **v, bool (*comp)(const pair
 
 Map::~Map()
 {
-    for(int i = 0; i < dimY; i++)
-    {
-        delete mapMatrix[i];
-    }
+    for(int i = 0; i < dimX; i++)
+        delete[] mapMatrix[i];
+
     for(int i = 0; i < numElements; i++)
     {
-        delete visitorsPreferenceMatrix[i];
-        delete bikesPreferenceMatrix[i];
+        delete[] visitorsPreferenceMatrix[i];
+        delete[] bikesPreferenceMatrix[i];
     }
 
     delete[] mapMatrix;
