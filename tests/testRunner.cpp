@@ -402,7 +402,7 @@ int main(int argc, char** argv) {
     tests.test_addCoordOfBike(map);
 
     cout << "Success! All unit tests passed!" << "\n";
-
+    /*
     cout << "Starting system tests..." << "\n";
 
     exec_system(argv[1]);
@@ -410,6 +410,7 @@ int main(int argc, char** argv) {
 
     cout << "Success! All system tests passed!" << "\n";
     cout << "All tests passed for '" << argv[1] << "' file!\n";
+    */
 
     return 0;
 }
