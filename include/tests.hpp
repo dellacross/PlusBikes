@@ -11,7 +11,7 @@ class Tests
         ~Tests(){};
 
         // *1*
-        void test_getDimensions(fstream &file);
+        void test_BikeOrVisitor();
 
         // *2*
         void test_ifExists();

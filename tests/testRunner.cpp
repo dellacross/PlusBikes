@@ -72,21 +72,14 @@ void setMapMatrixCells(fstream &file, Map &map, int xAxis, int yAxis, int number
 
 // UNIT TESTS
 
-// *1*
-void Tests::test_getDimensions(fstream &file){
-    vector<int> values = getDimensions(file);
+int numberOfElements = -1, x_dimension = -1, y_dimension = -1;
 
-    int _numberOfElements, _dimX, _dimY;
-    string line = "";
-    stringstream lineStream(line);
-    getline(file, line);
-    lineStream >> _numberOfElements;
-    getline(file, line);
-    lineStream >> _dimX >> _dimY;
-    
-    assert(_numberOfElements == values[0]);
-    assert(_dimX == values[1]);
-    assert(_dimY == values[2]);
+// *1* 
+void Tests::test_BikeOrVisitor(){
+    assert(BikeOrVisitor('a') == false);
+    assert(BikeOrVisitor('d') == false);    
+    assert(BikeOrVisitor('2') == true);
+    assert(BikeOrVisitor('3') == true);
 }
 
 // *2*
@@ -361,17 +354,16 @@ void compareFiles(string fileName) {
 }
 
 int main(int argc, char** argv) {
-    fstream file1(argv[1]);
+
     Tests tests;
     Map* map = new Map(4, 4, 3);
     map->initMapMatrix();
 
     cout << "Starting unit tests..." << "\n";
 
-    if(file1) {
-        // *1*
-        tests.test_getDimensions(file1);
-    }
+    // *1*
+    tests.test_BikeOrVisitor();
+
     // *2*
     tests.test_ifExists();
 
@@ -417,7 +409,7 @@ int main(int argc, char** argv) {
     cout << "Success! All unit tests passed!" << "\n";
 
     cout << "Starting system tests..." << "\n";
-
+    
     exec_system(argv[1]);
     compareFiles(argv[1]);
 
