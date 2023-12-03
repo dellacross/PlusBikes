@@ -32,17 +32,17 @@ jobs:
       run: |
         mkdir obj
         mkdir bin
-        if [[ $RUNNER_OS == "Windows" ]]; then
-          g++ -Wall -Iinclude -Og -g -std=c++11 -c -o obj/map.o src/map.cpp
-          g++ -Wall -Iinclude -Og -g -std=c++11 -c -o obj/testRunner.o tests/testRunner.cpp
+        g++ -Wall -Iinclude -Og -g -std=c++11 -c -o obj/map.o src/map.cpp
+        g++ -Wall -Iinclude -Og -g -std=c++11 -c -o obj/testRunner.o tests/testRunner.cpp
+        if [[ $RUNNER_OS == "windows-latest" ]]; then
           g++ -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp obj/map.o -lm
-          ./bin/testRunner < tests/teste1.in
-          ./bin/testRunner < tests/teste2.in
-          ./bin/testRunner < tests/teste3.in
-          ./bin/testRunner < tests/teste4.in
-          ./bin/testRunner < tests/teste5.in
+          ./bin/testRunner.exe tests/teste1.in
+          ./bin/testRunner.exe tests/teste2.in
+          ./bin/testRunner.exe tests/teste3.in
+          ./bin/testRunner.exe tests/teste4.in
+          ./bin/testRunner.exe tests/teste5.in
         else
-          make
+          g++ -o bin/testRunner -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp obj/map.o -lm
           ./bin/testRunner tests/teste1.in
           ./bin/testRunner tests/teste2.in
           ./bin/testRunner tests/teste3.in
