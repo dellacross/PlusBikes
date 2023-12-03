@@ -290,12 +290,12 @@ void exec_system(string filePath) {
                     if (vm[i][k].second >= g && !ifExists(k, auxV))
                     {
                         //cout << "i:" << i << " k:" << k << "\n";
-                        g = vm[i][k].second;
-                        gpos = k;
+                        //g = vm[i][k].second;
+                        //gpos = k;
                     }
                 }
-                //auxV.push_back(gpos);
-                //map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
+                auxV.push_back(gpos);
+                map.updateVisitorsPreferenceMatrix(i, j, gpos, g);
                 g = -1;
                 gpos = -1;
             }
