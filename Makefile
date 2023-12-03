@@ -26,6 +26,9 @@ $(OBJ)/testRunner.o: $(HDRS) $(TESTS)/testRunner.cpp
 $(BIN)/testRunner: $(OBJ)/map.o
 	g++ -o bin/testRunner $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
 
+$(BIN)/testRunner.exe: $(OBJ)/map.o
+	g++ -o bin/testRunner.exe $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
+
 $(BIN)/tp02: $(OBJS)
 	$(CC) -o $(BIN)/tp02 $(CFLAGS) $(OBJS) $(LIBS)
 
