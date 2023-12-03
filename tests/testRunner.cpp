@@ -304,11 +304,11 @@ void exec_system(string filePath) {
         
         map.GaleShapley(filePath, true);
         file.close();
+        cout << "fechou arquivo" << "\n";
     }
     else
         cout << "ERROR: FILE NOT FOUND!"
              << "\n";
-    cout << "saiu do if file" << "\n";
 }
 
 void compareFiles(string fileName) {
