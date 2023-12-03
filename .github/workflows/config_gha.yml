@@ -19,6 +19,7 @@ jobs:
         mkdir bin
         make
         if [[ $RUNNER_OS == "Windows" ]]; then
+          icacls bin/testRunner.exe /grant Users:RX
           ./bin/testRunner.exe tests/teste1.in
         else
           ./bin/testRunner tests/teste1.in
