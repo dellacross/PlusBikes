@@ -22,6 +22,11 @@ jobs:
           g++ -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp obj/map.o -lm
           cd bin
           dir
+          cd ..
+          cd tests
+          dir
+          cd ..
+          cd bin
           ./testRunner.exe ../tests/teste1.in
         else
           make
