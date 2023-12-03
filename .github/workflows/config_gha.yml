@@ -18,4 +18,9 @@ jobs:
         mkdir obj
         mkdir bin
         make
+        if [[ $RUNNER_OS == "Windows" ]]; then
+          dir
+        else
+          ls
+        fi
         ./bin/testRunner tests/teste1.in
