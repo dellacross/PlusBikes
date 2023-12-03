@@ -21,6 +21,8 @@ jobs:
         if [[ $RUNNER_OS == "Windows" ]]; then
           cd bin
           dir
+          g++ -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 tests/testRunner.cpp obj/map.o -lm
+          dir
           ./testRunner.exe ../tests/teste1.in
         fi
         ./bin/testRunner tests/teste1.in
