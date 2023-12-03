@@ -269,7 +269,6 @@ void exec_system(string filePath) {
         for (int i = 0; i < n; i++)
         {
             int aux = 0;
-            pair<int, int> av;
             getline(file, line);
             stringstream auxLine(line);
 
@@ -303,7 +302,6 @@ void exec_system(string filePath) {
         }
         cout << "Output:" << "\n";
         map.GaleShapley(filePath);
-        cout << "\n";
 
         file.close();
     }

@@ -89,7 +89,6 @@ int main(int argc, char *argv[])
         for (int i = 0; i < n; i++)
         {
             int aux = 0;
-            pair<int, int> av;
             getline(file, line);
             stringstream auxLine(line);
 
