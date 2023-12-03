@@ -290,8 +290,8 @@ void exec_system(string filePath) {
                     if (vm[i][k].second >= g && !ifExists(k, auxV))
                     {
                         //cout << "i:" << i << " k:" << k << "\n";
-                        //g = vm[i][k].second;
-                        //gpos = k;
+                        g = vm[i][k].second;
+                        gpos = k;
                     }
                 }
                 auxV.push_back(gpos);
@@ -302,8 +302,8 @@ void exec_system(string filePath) {
             auxV.clear();
         }
         
-        //map.GaleShapley(filePath, true);
-        
+        map.GaleShapley(filePath, true);
+        cout << "saiu do gale shapley" << "\n";
         file.close();
     }
     else
