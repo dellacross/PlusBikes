@@ -263,7 +263,7 @@ void exec_system(string filePath) {
         Map map(x, y, n);
 
         setMapMatrixCells(file, map, x, y, n);
-
+        /*
         pair<int, int> vm[n][n];
         vector<int> auxV;
         for (int i = 0; i < n; i++)
@@ -301,7 +301,7 @@ void exec_system(string filePath) {
             auxV.clear();
         }
         map.GaleShapley(filePath, true);
-
+        */
         file.close();
     }
     else
