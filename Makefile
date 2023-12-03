@@ -23,8 +23,8 @@ $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 $(OBJ)/testRunner.o: $(HDRS) $(TESTS)/testRunner.cpp
 	$(CC) $(CFLAGS) -c -o $(OBJ)/testRunner.o $(TESTS)/testRunner.cpp
 
-/testRunner: $(OBJ)/map.o
-	g++ -o testRunner $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
+$(BIN)/testRunner: $(OBJ)/map.o
+	g++ -o $(BIN)/testRunner $(CFLAGS) $(TESTS)/testRunner.cpp $(OBJ)/map.o $(LIBS)
 
 $(BIN)/tp02: $(OBJS)
 	$(CC) -o $(BIN)/tp02 $(CFLAGS) $(OBJS) $(LIBS)
