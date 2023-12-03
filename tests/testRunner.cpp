@@ -279,7 +279,6 @@ void exec_system(string filePath) {
             }
         }
 
-        /*
         int g = -1, gpos = -1;
         for (int i = 0; i < n; i++)
         {
@@ -300,6 +299,7 @@ void exec_system(string filePath) {
             }
             auxV.clear();
         }
+        /*
         map.GaleShapley(filePath, true);
         */
         file.close();
