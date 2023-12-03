@@ -32,9 +32,10 @@ jobs:
       run: |
         mkdir obj
         mkdir bin
-        make
-        ./bin/testRunner.exe tests/teste1.in
-        ./bin/testRunner.exe tests/teste2.in
-        ./bin/testRunner.exe tests/teste3.in
-        ./bin/testRunner.exe tests/teste4.in
-        ./bin/testRunner.exe tests/teste5.in
+        if [[ $RUNNER_OS == "Windows" ]]; then
+          g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner.exe -Wall -Iinclude -Og -g -std=c++11 -lm
+          ./testRunner.exe
+        else
+          g++ src/map.cpp tests/testRunner.cpp -o bin/testRunner -Wall -Iinclude -Og -g -std=c++11 -lm
+          ./testRunner
+        fi
