@@ -354,7 +354,7 @@ int main(int argc, char** argv) {
     Map* map = new Map(4, 4, 3);
     map->initMapMatrix();
 
-    //cout << "Starting unit tests..." << "\n";
+    cout << "Starting unit tests..." << "\n";
 
     // *1*
     tests.test_BikeOrVisitor();
@@ -401,14 +401,14 @@ int main(int argc, char** argv) {
     // *15* 
     tests.test_addCoordOfBike(map);
 
-    //cout << "Success! All unit tests passed!" << "\n";
+    cout << "Success! All unit tests passed!" << "\n";
 
-    //cout << "Starting system tests..." << "\n";
+    cout << "Starting system tests..." << "\n";
 
     exec_system(argv[1]);
     compareFiles(argv[1]);
 
-    cout << "Success! All tests passed!" << "\n";
+    cout << "Success! All system tests passed!" << "\n";
 
     return 0;
 }
