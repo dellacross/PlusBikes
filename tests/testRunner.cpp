@@ -303,12 +303,12 @@ void exec_system(string filePath) {
         }
         
         map.GaleShapley(filePath, true);
-        cout << "saiu do gale shapley" << "\n";
         file.close();
     }
     else
         cout << "ERROR: FILE NOT FOUND!"
              << "\n";
+    cout << "saiu do if file" << "\n";
 }
 
 void compareFiles(string fileName) {
