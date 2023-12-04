@@ -14,20 +14,18 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Build project
+      shell: bash
       run: |
         mkdir obj
         mkdir bin
         make
+        dir
 
     - name: Compile and Run Tests
       shell: bash
       run: |
         if [[ $RUNNER_OS == "windows-latest" ]]; then
-          cd bin
-          dir
-          cd ..
-          cd
-          bin/testRunner.exe tests/teste1.in
+          ./bin/testRunner.exe tests/teste1.in
         else
           ./bin/testRunner tests/teste1.in
           ./bin/testRunner tests/teste2.in
