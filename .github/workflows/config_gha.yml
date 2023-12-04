@@ -14,7 +14,6 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Build project
-      shell: bash
       run: |
         mkdir obj
         mkdir bin
@@ -25,7 +24,8 @@ jobs:
       shell: bash
       run: |
         if [[ $RUNNER_OS == "windows-latest" ]]; then
-          ./bin/testRunner.exe tests/teste1.in
+          g++ src/map.cpp tests/testRunner.cpp -o testRunner.exe
+          ./testRunner.exe tests/teste1.in
         else
           ./bin/testRunner tests/teste1.in
           ./bin/testRunner tests/teste2.in
