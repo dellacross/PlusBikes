@@ -18,7 +18,6 @@ jobs:
         mkdir obj
         mkdir bin
         make
-        dir
 
     - name: Compile and Run Tests
       shell: bash
