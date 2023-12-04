@@ -21,7 +21,7 @@ jobs:
 
     - name: Compile and Run Tests
       run: |
-        if [[ $RUNNER_OS == "windows-latest" ]]; then
+        if [ $RUNNER_OS == "Windows" ]; then
           g++ src/map.cpp tests/testRunner.cpp -o testRunner.exe
           ./testRunner.exe tests/teste1.in
         else
