@@ -13,12 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up C++ compiler
-      uses: actions/setup-cpp@v2
-      with:
-        compiler: g++
-
-
     - name: Build project
       run: |
         mkdir obj
