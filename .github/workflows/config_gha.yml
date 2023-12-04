@@ -13,14 +13,24 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up C++ compiler
+      uses: actions/setup-cpp@v2
+      with:
+        compiler: g++
+
+
+    - name: Build project
+      run: |
+        mkdir obj
+        mkdir bin
+        make
+
     - name: Compile and Run Tests
       shell: bash
       run: |
         if [[ $RUNNER_OS == "Windows" ]]; then
-          g++ src/map.cpp tests/testRunner.cpp -o testRunner.exe
-          ./testRunner.exe tests/teste1.in
+          ./bin/testRunner.exe tests/teste1.in
         else
-          g++ src/map.cpp tests/testRunner.cpp -o testRunner
-          ./testRunner tests/teste1.in
+          ./bin/testRunner tests/teste1.in
         fi
       
