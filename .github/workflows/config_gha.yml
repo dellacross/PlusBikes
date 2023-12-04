@@ -1,3 +1,4 @@
+
 name: TP2-ES2-TESTS
 
 on: [push, pull_request]
@@ -12,17 +13,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Compile and Run Tests
-      shell: bash
+    - name: Build project
       run: |
         mkdir obj
         mkdir bin
         make
-        if [[ $RUNNER_OS == "Windows" ]]; then
-          cd bin
-          dir
-          cd
-          ./testRunner.exe ../tests/teste1.in
+
+    - name: Compile and Run Tests
+      shell: bash
+      run: |
+        if [[ $RUNNER_OS == "windows-latest" ]]; then
+          bin/testRunner.exe tests/teste1.in
+          bin/testRunner.exe tests/teste2.in
+          bin/testRunner.exe tests/teste3.in
+          bin/testRunner.exe tests/teste4.in
+          bin/testRunner.exe tests/teste5.in
         else
           ./bin/testRunner tests/teste1.in
+          ./bin/testRunner tests/teste2.in
+          ./bin/testRunner tests/teste3.in
+          ./bin/testRunner tests/teste4.in
+          ./bin/testRunner tests/teste5.in
         fi
