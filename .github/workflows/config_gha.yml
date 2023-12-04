@@ -20,7 +20,6 @@ jobs:
         make
 
     - name: Compile and Run Tests
-      shell: bash
       run: |
         if [[ $RUNNER_OS == "windows-latest" ]]; then
           g++ src/map.cpp tests/testRunner.cpp -o testRunner.exe
